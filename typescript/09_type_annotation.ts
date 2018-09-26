@@ -1,5 +1,4 @@
-// 引数callbackは関数オブジェクトを取り、
-// その関数の引数の型と戻り値の型を指定
+// 引数callbackは関数オブジェクトを取り、その関数の引数の型と戻り値の型を指定
 function onSuccess(callback: (value: string) => void) {
     callback("成功！");
 }
