@@ -1,7 +1,7 @@
 const functions = require('firebase-functions');
 
 // // Create and Deploy Your First Cloud Functions
-// /A/ https://firebase.google.com/docs/functions/write-firebase-functions
+// // https://firebase.google.com/docs/functions/write-firebase-functions
 //
 // exports.helloWorld = functions.https.onRequest((request, response) => {
 //  response.send("Hello from Firebase!");
@@ -24,7 +24,7 @@ const anonymousUser = {
 
 const checkUser = (req, res, next) => {
     req.user = anonymousUser;
-    if (req.query.auth_token != undefined) {
+    if (req.query.auth_token !== undefined) {
         let idToken = req.query.auth_token;
         admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
             let authUser = {
@@ -44,12 +44,12 @@ const checkUser = (req, res, next) => {
 
 app.use(checkUser);
 
-function createChannel(cname) {
+function createChannel(cname){
     let channelsRef = admin.database().ref('channels');
     let date1 = new Date();
     let date2 = new Date();
     date2.setSeconds(date2.getSeconds() + 1);
-    const defaultData =  `{
+    const defaultData = `{
         "messages" : {
             "1" : {
                 "body" : "Welcome to #${cname} channel!",
@@ -57,16 +57,16 @@ function createChannel(cname) {
                 "user" : {
                     "avatar" : "",
                     "id" : "robot",
-                    "name": "Robot"
+                    "name" : "Robot"
                 }
             },
             "2" : {
                 "body" : "はじめてのメッセージを投稿してみましょう。",
                 "date" : "${date2.toJSON()}",
                 "user" : {
-                  "avatar" : "",
-                  "id" : "robot",
-                  "name" : "Robot"  
+                    "avatar" : "",
+                    "id" : "robot",
+                    "name" : "Robot"
                 }
             }
         }
@@ -78,7 +78,7 @@ app.post('/channels', (req, res) => {
     let cname = req.body.cname;
     createChannel(cname);
     res.header('Content-Type', 'application/json; charset=utf-8');
-    res.status(201).json({result: 'ok'}); 
+    res.status(201).json({result: 'ok'});
 });
 
 app.get('/channels', (req, res) => {
@@ -89,7 +89,7 @@ app.get('/channels', (req, res) => {
             let cname = childSnapshot.key;
             items.push(cname);
         });
-        res.header('Content-Type', 'applycation/json; charset=utf-8');
+        res.header('Content-Type', 'application/json; charset=utf-8');
         res.send({channels: items});
     });
 });
@@ -97,14 +97,14 @@ app.get('/channels', (req, res) => {
 app.post('/channels/:cname/messages', (req, res) => {
     let cname = req.params.cname;
     let message = {
-        date: new Date().toJSON(), 
+        date: new Date().toJSON(),
         body: req.body.body,
         user: req.user
     };
     let messagesRef = admin.database().ref(`channels/${cname}/messages`);
     messagesRef.push(message);
-    res.header('Content-Type', 'application/json', )
-    res.status(201).send({result "ok"});
+    res.header('Content-Type', 'application/json; charset=utf-8');
+    res.status(201).send({result: "ok"});
 });
 
 app.get('/channels/:cname/messages', (req, res) => {
@@ -112,7 +112,7 @@ app.get('/channels/:cname/messages', (req, res) => {
     let messagesRef = admin.database().ref(`channels/${cname}/messages`).orderByChild('date').limitToLast(20);
     messagesRef.once('value', function(snapshot) {
         let items = new Array();
-        snapshot.forEach(function(chihldSnapshot) {
+        snapshot.forEach(function(childSnapshot) {
             let message = childSnapshot.val();
             message.id = childSnapshot.key;
             items.push(message);
