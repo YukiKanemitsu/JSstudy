@@ -24,7 +24,7 @@ const anonymousUser = {
 
 const checkUser = (req, res, next) => {
     req.user = anonymousUser;
-    if (req.query.auth_token !== undefined) {
+    if (req.query.auth_token != undefined) {
         let idToken = req.query.auth_token;
         admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
             let authUser = {
