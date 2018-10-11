@@ -8,17 +8,23 @@ export const ChannelList = () => {
     return (
         <Menu inverted vertical fixed={'left'}>
             <Menu.Item as={Link} to={'/'}>
-                Channels
-                <Menu.Menu>
-                    {channels.map(channel =>
-                        <Menu.Item 
-                        key={channel} 
-                        as={NavLink} 
-                        to={{ pathname: `/channels/${channel}` }}>
-                        {channel}
-                        </Menu.Item>
-                    )}
-                </Menu.Menu>
+                Home
+                <Icon name='home' />
+            </Menu.Item>
+            <Menu.Item>
+                channels
+                <Icon name='list' />
+                    <Menu.Menu>
+                        {channels.map(channel =>
+                            <Menu.Item 
+                                key={channel}
+                                name={channel}  
+                                as={NavLink} 
+                                to={{ pathname: `/channels/${channel}` }}>
+                                {channel}
+                            </Menu.Item>
+                        )}
+                    </Menu.Menu>
             </Menu.Item>
         </Menu>
     );
