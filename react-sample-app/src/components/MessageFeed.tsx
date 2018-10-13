@@ -20,6 +20,26 @@ export class MessageFeed extends React.Component<MessageFeedProps, MessageFeedSt
     }
 }
 
+private fetchMessages = (channelName: string) => {
+    fetchMessages(channelName)
+    .then(response => {
+        this.setState({ messages: response.data.messages });
+    })
+    .catch(err => {
+        console.log(err);
+    });
+}
+
+public componentDidMount() {
+    this.fetchMessages(this.props.channelName);
+}
+
+public componentDidUpdate(prevProps: MessageFeedProps) {
+    if (prevProps.channelName !== this.props.channelName) {
+        this.fetchMessages(this.props.channelName);
+    }
+}
+
 public render() {
     return (
         <Comment.Group>
