@@ -1,7 +1,7 @@
 import Axios, { AxiosInstance, AxiosResponse, CancelToken } from 'axios';
 
-const baseURL = 'https://us-central1-demoapp-89965.cloudfunctions.net/v1';
-
+const baseURL = 'https://us-central1-demoapp-89965/us-central1/v1';
+// http://localhost:5000/demoapp-89965/us-central1/v1
 const instance: AxiosInstance = Axios.create({
     baseURL,
     timeout: 10000
