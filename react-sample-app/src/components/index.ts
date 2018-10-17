@@ -1,2 +1,2 @@
-export * from './ChannelList';
 export * from './MessageFeed';
+export * from './ChannelList';
