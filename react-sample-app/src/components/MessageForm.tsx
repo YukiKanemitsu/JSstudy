@@ -9,3 +9,13 @@ interface MessageFormProps {
 interface MessageFormState {
     body?: string;
 }
+
+export class MessageForm extends React.Component<MessageFormProps, MessageFormState> {
+
+    constructor(props: MessageFormProps) {
+        super(props);
+        this.state = {
+            body: ''
+        };
+    }
+}
