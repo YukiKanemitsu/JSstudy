@@ -2,7 +2,7 @@ import * as React from 'react';
 import { postMessage, Message } from '../client';
 import { Button, Form, Segment, TextArea } from 'semantic-ui-react';
 
-// const baseUrl = 'https://react-sample-app-84674.firebaseio.com/';
+const baseUrl = 'https://demoapp-89965.firebaseio.com/';
 
 interface MessageFormProps {
     channelName: string;
