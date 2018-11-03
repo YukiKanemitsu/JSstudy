@@ -6,6 +6,7 @@ const baseUrl = 'https://demoapp-89965.firebaseio.com/';
 
 interface MessageFormProps {
     channelName: string;
+    setShouldReload: (shouldReload: boolean) => void;
 }
 
 interface MessageFormState {
@@ -43,6 +44,9 @@ export class MessageForm extends React.Component<MessageFormProps, MessageFormSt
             })
             .catch(err => {
                 console.log(err);
+            })
+            .then(() => {
+                this.props.setShouldReload(true);
             });
     }
 
@@ -59,7 +63,6 @@ export class MessageForm extends React.Component<MessageFormProps, MessageFormSt
                     </Form.Field>
                     <Button primary type='submit'>Send</Button>
                 </Form>
-                <p>入力中の値: {this.state.body}</p>
             </Segment>
         );
     }
