@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Menu, Icon } from 'semantic-ui-react';
-import { Link, NavLink } from 'react-router-dom';
+import { Icon, Menu } from 'semantic-ui-react';
+import { NavLink, Link } from 'react-router-dom';
 
 const channels = ['general', 'random'];
 
@@ -12,19 +12,19 @@ export const ChannelList = () => {
                 <Icon name='home' />
             </Menu.Item>
             <Menu.Item>
-                channels
+                Channel
                 <Icon name='list' />
-                    <Menu.Menu>
-                        {channels.map(channel =>
-                            <Menu.Item 
-                                key={channel}
-                                name={channel}  
-                                as={NavLink} 
-                                to={{ pathname: `/channels/${channel}` }}>
-                                {channel}
-                            </Menu.Item>
-                        )}
-                    </Menu.Menu>
+                <Menu.Menu>
+                    {channels.map(channel =>
+                        <Menu.Item
+                            key={channel}
+                            name={channel}
+                            as={NavLink}
+                            to={`/channels/${channel}`}>
+                            {channel}
+                        </Menu.Item>
+                    )}
+                </Menu.Menu>
             </Menu.Item>
         </Menu>
     );
